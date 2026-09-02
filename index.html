@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4B Investment — Vastgoed voor de lange termijn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAF9F4;
+    --bg-warm: #F2EFE6;
+    --deep: #12312E;
+    --deep-2: #0D2422;
+    --teal: #2F6E63;
+    --fresh: #8FDD9E;
+    --fresh-2: #C9E86B;
+    --ink: #16211D;
+    --ink-soft: #46554F;
+    --line: #D9D3C3;
+    --line-dark: rgba(255,255,255,0.16);
+    --max: 1180px;
+    --r-pill: 999px;
+    --r-lg: 22px;
+    --r-md: 14px;
+    --r-sm: 10px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  section[id], header[id]{ scroll-margin-top:80px; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  p{margin:0;}
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{ position:relative; }
+
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,249,244,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s, box-shadow .3s;
+  }
+  .nav.is-scrolled{
+    border-bottom-color:var(--line);
+    box-shadow:0 8px 24px rgba(18,49,46,0.06);
+  }
+  .scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:3px;
+    width:0%;
+    background:linear-gradient(90deg, var(--teal), var(--fresh));
+    z-index:60;
+    transition:width .1s linear;
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-word{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-size:1.05rem;
+    letter-spacing:0.01em;
+    color:var(--ink-soft);
+  }
+  .brand-word b{ color:var(--deep); font-weight:600; }
+  .nav-links{ display:flex; gap:26px; font-size:0.95rem; }
+  .nav-links button{
+    font-family:'Work Sans', sans-serif;
+    background:none;
+    border:none;
+    padding:0 0 2px 0;
+    margin:0;
+    font-size:0.95rem;
+    cursor:pointer;
+    text-decoration:none;
+    color:var(--ink-soft);
+    transition:color .2s;
+    position:relative;
+  }
+  .nav-links button::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:100%;
+    height:1px;
+    background:var(--teal);
+    transform:scaleX(0);
+    transform-origin:right;
+    transition:transform .25s ease;
+  }
+  .nav-links button:hover{ color:var(--deep); }
+  .nav-links button:hover::after{ transform:scaleX(1); transform-origin:left; }
+  .nav-cta{
+    font-family:inherit;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+    border:none;
+    background-color:var(--deep);
+    color:#fff;
+    padding:10px 22px;
+    border-radius:var(--r-pill);
+    text-decoration:none;
+    font-size:0.9rem;
+    font-weight:500;
+    transition:background-color .2s, transform .2s;
+    display:inline-block;
+  }
+  .nav-cta:hover{ background-color:var(--deep-2); transform:translateY(-1px); }
+  @media (max-width:800px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(1200px 500px at 10% -10%, rgba(143,221,158,0.10), transparent 60%),
+      var(--deep);
+    color:#fff;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(60px);
+    pointer-events:none;
+    opacity:0.55;
+    will-change:transform;
+  }
+  .hero-blob.b1{
+    width:340px; height:340px;
+    background:radial-gradient(circle at 30% 30%, rgba(143,221,158,0.35), transparent 70%);
+    top:-80px; left:-60px;
+    animation:drift1 16s ease-in-out infinite;
+  }
+  .hero-blob.b2{
+    width:280px; height:280px;
+    background:radial-gradient(circle at 60% 40%, rgba(201,232,107,0.28), transparent 70%);
+    bottom:-100px; right:10%;
+    animation:drift2 20s ease-in-out infinite;
+  }
+  .hero-blob.b3{
+    width:200px; height:200px;
+    background:radial-gradient(circle at 50% 50%, rgba(47,110,99,0.5), transparent 70%);
+    top:30%; right:-40px;
+    animation:drift3 13s ease-in-out infinite;
+  }
+  @keyframes drift1{
+    0%,100%{ transform:translate(0,0); }
+    50%{ transform:translate(40px, 30px); }
+  }
+  @keyframes drift2{
+    0%,100%{ transform:translate(0,0); }
+    50%{ transform:translate(-30px, -36px); }
+  }
+  @keyframes drift3{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-20px, 24px) scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-blob{ animation:none !important; }
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:0.95fr 1.3fr;
+    gap:40px;
+    align-items:end;
+    padding-top:100px;
+    padding-bottom:80px;
+    position:relative;
+    z-index:1;
+  }
+  .hero-content{
+    max-width:520px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    text-align:left;
+  }
+  .hero-eyebrow{
+    color:var(--fresh);
+    font-size:0.95rem;
+    font-weight:500;
+    margin-bottom:14px;
+    letter-spacing:0.01em;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(2rem, 3.6vw, 3.1rem);
+    line-height:1.12;
+    font-weight:600;
+    max-width:15ch;
+  }
+  .hero p.lead{
+    margin-top:18px;
+    max-width:44ch;
+    color:rgba(255,255,255,0.82);
+    font-size:1.02rem;
+  }
+  .hero-actions{
+    margin-top:28px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+  .btn{
+    display:inline-block;
+    font-family:inherit;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+    margin:0;
+    padding:14px 28px;
+    border-radius:var(--r-pill);
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:500;
+    transition:transform .2s cubic-bezier(.2,.7,.3,1.3), background .2s, border-color .2s, box-shadow .2s;
+    border:1px solid transparent;
+    will-change:transform;
+  }
+  .btn:hover{ transform:translateY(-2px) scale(1.02); }
+  .btn:active{ transform:translateY(0) scale(0.98); }
+  .btn-primary{ background:var(--fresh); color:var(--deep-2); }
+  .btn-primary:hover{ background:var(--fresh-2); box-shadow:0 12px 28px rgba(143,221,158,0.16); }
+  .btn-ghost{ background:transparent; border-color:rgba(255,255,255,0.35); color:#fff; }
+  .btn-ghost:hover{ background:rgba(255,255,255,0.06); border-color:#fff; }
+  .btn-dark{ background:var(--deep); color:#fff; }
+  .btn-dark:hover{ background:var(--deep-2); box-shadow:0 12px 28px rgba(18,49,46,0.14); }
+
+  .hero-visual{ position:relative; perspective:900px; width:100%; }
+  .plot-art{ width:100%; height:auto; display:block; transform-style:preserve-3d; overflow:visible; }
+
+  @media (max-width:900px){
+    .hero .wrap{ grid-template-columns:1fr; padding-top:48px; padding-bottom:40px; }
+    .hero-content{ align-items:center; text-align:center; max-width:none; }
+    .hero-actions{ justify-content:center; }
+    .hero h1{ max-width:none; }
+  }
+
+  /* Background skyline — thin one-line silhouettes, further away */
+  .tower{ fill:none; stroke:rgba(255,255,255,0.4); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .bush{ fill:none; stroke:rgba(255,255,255,0.42); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  .ground-line{ stroke:rgba(255,255,255,0.28); stroke-width:1.4; stroke-linecap:round; }
+
+  /* Foreground bedrijfshallen — the actual project, drawn the same way, interactive */
+  .hall{ cursor:pointer; transform-box:fill-box; transform-origin:50% 100%; transition:transform .25s cubic-bezier(.2,.7,.2,1), filter .25s ease; }
+  .hall:hover, .hall.is-active{ transform:translateY(-7px); filter:drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+  .hall-outline{ fill:none; stroke:var(--fresh); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; transition:stroke .2s ease; }
+  .hall:hover .hall-outline, .hall.is-active .hall-outline{ stroke:var(--fresh-2); }
+
+  .draw{
+    stroke-dasharray:2200;
+    stroke-dashoffset:2200;
+    animation:skylineDraw 3.4s ease forwards;
+    animation-delay:var(--dd, 0s);
+  }
+  @keyframes skylineDraw{ to{ stroke-dashoffset:0; } }
+  @media (prefers-reduced-motion: reduce){
+    .draw{ animation:none; stroke-dashoffset:0; }
+    .plot-art{ transition:none; }
+    .hall{ transition:none; }
+  }
+
+  .scroll-cue{
+    position:absolute;
+    left:32px; bottom:24px;
+    display:flex; align-items:center; gap:10px;
+    color:rgba(255,255,255,0.55);
+    font-size:0.82rem;
+    z-index:1;
+  }
+  .scroll-cue .line{
+    width:1px; height:34px;
+    background:rgba(255,255,255,0.3);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:"";
+    position:absolute;
+    left:0; top:-100%;
+    width:100%; height:100%;
+    background:var(--fresh);
+    animation:scrollcue 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollcue{
+    0%{ top:-100%; }
+    60%{ top:100%; }
+    100%{ top:100%; }
+  }
+  @media (max-width:900px){
+    .scroll-cue{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .scroll-cue .line::after{ animation:none; top:0; }
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    transition-delay:var(--rd, 0s);
+  }
+  .reveal.is-visible{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- ICON BADGES ---------- */
+  .icon-badge{
+    width:44px;
+    height:44px;
+    border-radius:var(--r-md);
+    background:rgba(47,110,99,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    margin-bottom:14px;
+    transition:transform .3s cubic-bezier(.2,.7,.2,1), background .25s ease;
+  }
+  .icon-badge svg{ width:22px; height:22px; color:var(--teal); overflow:visible; }
+  .icon-badge-dark{ background:rgba(143,221,158,0.12); }
+  .icon-badge-dark svg{ color:var(--fresh); }
+  .icon-draw{
+    stroke-dasharray:130;
+    stroke-dashoffset:130;
+    transition:stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.is-visible .icon-draw{ stroke-dashoffset:0; transition-delay:.2s; }
+  @media (prefers-reduced-motion: reduce){
+    .icon-draw{ stroke-dashoffset:0; transition:none; }
+  }
+  .spec:hover .icon-badge{
+    transform:scale(1.08) rotate(-4deg);
+  }
+  .spec:hover .icon-badge-dark{ background:rgba(143,221,158,0.22); }
+
+  .trust-item.reveal:nth-child(1){ --rd:0s; }
+  .trust-item.reveal:nth-child(2){ --rd:.1s; }
+  .trust-item.reveal:nth-child(3){ --rd:.2s; }
+  .focus-item.reveal:nth-child(1){ --rd:0s; }
+  .focus-item.reveal:nth-child(2){ --rd:.1s; }
+  .focus-item.reveal:nth-child(3){ --rd:.2s; }
+  .audience-card.reveal:nth-child(1){ --rd:0s; }
+  .audience-card.reveal:nth-child(2){ --rd:.12s; }
+  .audience-card.reveal:nth-child(3){ --rd:.24s; }
+  .spec.reveal:nth-child(1){ --rd:0s; }
+  .spec.reveal:nth-child(2){ --rd:.06s; }
+  .spec.reveal:nth-child(3){ --rd:.12s; }
+  .spec.reveal:nth-child(4){ --rd:.18s; }
+  .spec.reveal:nth-child(5){ --rd:.24s; }
+  .spec.reveal:nth-child(6){ --rd:.3s; }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-pad{ padding:128px 0; }
+  @media (max-width:640px){ .section-pad{ padding:80px 0; } }
+  .hero + section.section-pad{ padding-top:72px; }
+  @media (max-width:640px){ .hero + section.section-pad{ padding-top:48px; } }
+  .section-head{
+    display:block;
+    margin-bottom:64px;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+    line-height:1.2;
+    max-width:22ch;
+  }
+  .section-head .support{
+    margin-top:18px;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    max-width:56ch;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .about-grid p{ color:var(--ink-soft); max-width:52ch; }
+  .trust-list{ display:flex; flex-direction:column; }
+  .trust-item{
+    padding:22px 18px;
+    margin:0 -18px;
+    border-radius:var(--r-md);
+    border-top:1px solid var(--line);
+    transition:background .25s ease, transform .25s ease;
+  }
+  .trust-item:last-child{ border-bottom:1px solid var(--line); }
+  .trust-item:hover{
+    background:var(--bg-warm);
+    transform:translateX(4px);
+  }
+  .trust-item h3{ font-size:1.05rem; font-weight:600; margin-bottom:6px; }
+  .trust-item span{ color:var(--ink-soft); font-size:0.96rem; }
+  @media (max-width:800px){
+    .about-grid{ grid-template-columns:1fr; gap:32px; }
+  }
+
+  /* ---------- FOCUS ---------- */
+  .focus{ background:var(--bg-warm); }
+  .focus-list{ }
+  .focus-item{
+    padding:36px 20px;
+    margin:0 -20px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1.4fr 2fr;
+    gap:32px;
+    border-radius:var(--r-md);
+    transition:background .25s ease, padding-left .25s ease;
+  }
+  .focus-item:last-child{ border-bottom:1px solid var(--line); }
+  .focus-item:hover{
+    background:#fff;
+    padding-left:28px;
+  }
+  .focus-item h3{ font-size:1.3rem; position:relative; }
+  .focus-item p{ color:var(--ink-soft); max-width:56ch; }
+  @media (max-width:800px){
+    .focus-item{ grid-template-columns:1fr; gap:10px; }
+  }
+
+  /* ---------- PROJECT ---------- */
+  .project{ background:var(--deep); color:#fff; }
+  .project-top{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:72px;
+    align-items:start;
+    padding-bottom:52px;
+  }
+  .project h2{ color:#fff; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.2; }
+  .project-loc{ color:var(--fresh); font-size:0.95rem; margin-bottom:14px; font-weight:500; }
+  .project p.lead{ color:rgba(255,255,255,0.8); margin-top:20px; max-width:50ch; }
+  .specs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .spec{
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--line-dark);
+    border-radius:var(--r-md);
+    padding:20px;
+    transition:background .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .spec:hover{
+    background:rgba(143,221,158,0.09);
+    border-color:rgba(143,221,158,0.4);
+    transform:translateY(-3px);
+  }
+  .spec dt{ color:var(--fresh); font-size:0.85rem; margin-bottom:8px; }
+  .spec dd{ margin:0; font-size:1rem; color:#fff; }
+  .project-note{
+    margin-top:28px;
+    font-size:0.9rem;
+    color:rgba(255,255,255,0.6);
+    max-width:56ch;
+  }
+  .project-actions{ margin-top:32px; display:flex; gap:16px; flex-wrap:wrap; }
+  .project-video{ margin-top:52px; }
+  .project-video-label{
+    color:var(--fresh);
+    font-size:0.9rem;
+    font-weight:500;
+    margin-bottom:14px;
+  }
+  .project-video video{
+    width:100%;
+    display:block;
+    border-radius:var(--r-lg);
+    border:1px solid var(--line-dark);
+    background:#000;
+    aspect-ratio:16/9;
+  }
+  @media (max-width:900px){
+    .project-top{ grid-template-columns:1fr; }
+    .specs{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- FOR WHOM ---------- */
+  .audience-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  .audience-card{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:var(--r-lg);
+    padding:40px 32px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    box-shadow:0 4px 16px rgba(18,49,46,0.05);
+    transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, border-color .3s ease;
+  }
+  .audience-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 48px rgba(18,49,46,0.06);
+    border-color:var(--teal);
+  }
+  .audience-card h3{ font-size:1.2rem; }
+  .audience-card p{ color:var(--ink-soft); font-size:0.96rem; flex:1; }
+  .audience-card button{
+    font-family:inherit;
+    background:none;
+    border:none;
+    border-radius:0;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:500;
+    font-size:0.92rem;
+    color:var(--deep);
+    border-bottom:1px solid var(--teal);
+    align-self:flex-start;
+    padding:0 0 2px 0;
+    transition:color .2s ease;
+  }
+  .audience-card button:hover{ color:var(--teal); }
+  @media (max-width:900px){
+    .audience-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ background:var(--bg-warm); }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .contact-info p{ color:var(--ink-soft); max-width:44ch; margin-bottom:28px; }
+  .info-row{
+    padding:20px 0;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+  }
+  .info-row div{ display:flex; flex-direction:column; gap:2px; }
+  .info-row:last-child{ border-bottom:1px solid var(--line); }
+  .info-row span{ font-size:0.85rem; color:var(--ink-soft); }
+  .info-row strong{ font-size:1.02rem; font-weight:500; }
+
+  form{ display:flex; flex-direction:column; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-size:0.88rem; color:var(--ink-soft); }
+  .field input, .field select, .field textarea{
+    font-family:'Work Sans', sans-serif;
+    font-size:1rem;
+    padding:12px 16px;
+    border:1px solid var(--line);
+    border-radius:var(--r-md);
+    background:#fff;
+    color:var(--ink);
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;
+    border-color:var(--teal);
+    box-shadow:0 0 0 3px rgba(47,110,99,0.15);
+  }
+  .field textarea{ resize:vertical; min-height:110px; }
+  .form-note{ font-size:0.85rem; color:var(--ink-soft); }
+  @media (max-width:800px){
+    .contact-grid{ grid-template-columns:1fr; gap:36px; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--deep-2); color:rgba(255,255,255,0.7); }
+  footer .wrap{
+    padding:40px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-size:0.88rem;
+  }
+  footer .f-brand{ color:#fff; font-family:'Fraunces', serif; font-weight:600; }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress"></div>
+<nav class="nav" id="site-nav">
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-word"><b>4B</b> Investment</span>
+    </div>
+    <div class="nav-links">
+      <button type="button" data-target="over-ons">Over ons</button>
+      <button type="button" data-target="focus">Investeren</button>
+      <button type="button" data-target="project">Project</button>
+      <button type="button" data-target="voor-wie">Voor wie</button>
+      <button type="button" data-target="contact">Contact</button>
+    </div>
+    <button type="button" class="nav-cta" data-target="contact">Neem contact op</button>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="hero-blob b3"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Investeren in vastgoed</div>
+      <h1>Vastgoed met een lange adem.</h1>
+      <p class="lead">4B Investment investeert in particulier en zakelijk vastgoed voor de lange termijn. Zorgvuldig geselecteerd, actief beheerd en gebouwd om waarde vast te houden — voor beleggers, huurders en de omgeving eromheen.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" data-target="project">Bekijk nieuwste project</button>
+        <button type="button" class="btn btn-ghost" data-target="contact">Neem contact op</button>
+      </div>
+    </div>
+    <div class="hero-visual" id="hero-visual">
+      <svg class="plot-art" id="plot-art" viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path class="tower draw" style="--dd:0.0s" d="M0,280 L0,218 L18,218 L18,280"></path>
+        <path class="tower draw" style="--dd:0.11s" d="M18,280 L18,162 L40,162 L40,280"></path>
+        <path class="tower draw" style="--dd:0.25s" d="M29,176 L35,191 L29,206 L35,221 L29,236 L35,251 L29,266"></path>
+        <path class="tower draw" style="--dd:0.29s" d="M40,280 L40,108 L55,108 L55,280"></path>
+        <path class="tower draw" style="--dd:0.4s" d="M41,108 q 6,-3 4,-9 q 2,-6 -8,-3 q -6,3 -2,8"></path>
+        <g class="hall" data-label="Hal 1" data-size="126 m²">
+          <path class="hall-outline draw" style="--dd:0.58s" d="M56,280 L56,202 L122,202 L122,280"></path>
+          <path class="hall-outline draw" style="--dd:0.67s" d="M65.9,202 q -6,-3 -4,-9 q 2,-6 8,-3 q 6,3 2,8"></path>
+          <path class="hall-outline draw" style="--dd:0.76s" d="M78,280 L78,236 L100,236 L100,280"></path>
+          <path class="hall-outline draw" style="--dd:0.83s" d="M69,216 l 12,0 l 0,14 l -12,0 Z"></path>
+        </g>
+        <g class="hall" data-label="Hal 2" data-size="126 m²">
+          <path class="hall-outline draw" style="--dd:0.83s" d="M138,280 L138,166 L206,166 L206,280"></path>
+          <path class="hall-outline draw" style="--dd:0.92s" d="M148.2,166 q 6,-3 4,-9 q 2,-6 -8,-3 q -6,3 -2,8"></path>
+          <path class="hall-outline draw" style="--dd:1.01s" d="M161,280 L161,236 L183,236 L183,280"></path>
+          <path class="hall-outline draw" style="--dd:1.08s" d="M152,180 l 12,0 l 0,14 l -12,0 Z"></path>
+        </g>
+        <g class="hall" data-label="Hal 3" data-size="126 m²">
+          <path class="hall-outline draw" style="--dd:1.08s" d="M222,280 L222,150 L290,150 L290,280"></path>
+          <path class="hall-outline draw" style="--dd:1.17s" d="M232.2,150 q -6,-3 -4,-9 q 2,-6 8,-3 q 6,3 2,8"></path>
+          <path class="hall-outline draw" style="--dd:1.26s" d="M245,280 L245,236 L267,236 L267,280"></path>
+          <path class="hall-outline draw" style="--dd:1.33s" d="M236,164 l 12,0 l 0,14 l -12,0 Z"></path>
+        </g>
+        <g class="hall" data-label="Hal 4" data-size="126 m²">
+          <path class="hall-outline draw" style="--dd:1.33s" d="M306,280 L306,182 L372,182 L372,280"></path>
+          <path class="hall-outline draw" style="--dd:1.42s" d="M315.9,182 q 6,-3 4,-9 q 2,-6 -8,-3 q -6,3 -2,8"></path>
+          <path class="hall-outline draw" style="--dd:1.51s" d="M328,280 L328,236 L350,236 L350,280"></path>
+          <path class="hall-outline draw" style="--dd:1.58s" d="M319,196 l 12,0 l 0,14 l -12,0 Z"></path>
+        </g>
+        <path class="tower draw" style="--dd:1.62s" d="M384,280 L384,132 L401,132 L401,280"></path>
+        <path class="tower draw" style="--dd:1.71s" d="M388,142 L388,274"></path>
+        <path class="tower draw" style="--dd:1.78s" d="M392,142 L392,274"></path>
+        <path class="tower draw" style="--dd:1.85s" d="M397,142 L397,274"></path>
+        <path class="tower draw" style="--dd:1.8s" d="M404,280 L404,188 L424,188 L424,280"></path>
+        <path class="tower draw" style="--dd:1.94s" d="M414,202 L420,217 L414,232 L420,247 L414,262"></path>
+        <path class="tower draw" style="--dd:2.07s" d="M452,280 L452,42 L464,42 L464,280"></path>
+        <path class="bush draw" style="--dd:2.43s" d="M438,280 L438,254"></path>
+        <path class="bush draw" style="--dd:2.57s" d="M434,260 L434,260 L434,244 L435,243 L435,244 L436,244 L436,245 L435,247 L434,247 L433,247 L431,247 L429,245 L429,243 L429,241 L431,239 L434,237 L437,237 L439,239 L442,242 L442,245 L442,249 L439,252 L435,254 L431,254 L426,252 L423,248 L422,243 L423,238 L427,233 L432,231 L438,231 L444,234 L448,238 L449,245 L448,251 L443,257"></path>
+        <path class="bush draw" style="--dd:2.72s" d="M445,256 L445,256 L445,244 L445,243 L444,244 L444,244 L443,244 L443,245 L444,246 L444,247 L446,247 L447,247 L448,246 L449,245 L450,244 L449,242 L449,240 L447,239 L445,238 L443,238 L440,239 L439,241 L438,243 L438,246 L439,249 L441,251 L443,253 L447,253 L450,252 L453,250 L455,247 L456,243 L455,239 L453,236 L449,233 L445,232"></path>
+        <path class="bush draw" style="--dd:2.61s" d="M80,280 L80,274 L80,261 L81,260 L81,261 L82,261 L82,262 L81,263 L80,264 L79,264 L78,264 L77,263 L76,261 L76,259 L77,257 L78,256 L81,255 L83,256 L85,257 L87,260 L87,263 L86,266 L84,268 L81,269 L77,269 L74,268 L71,264 L70,260 L71,256 L73,253 L77,250 L82,250 L87,251 L91,255 L93,260 L92,265"></path>
+        <path class="bush draw" style="--dd:2.7s" d="M95,280 q 4,-11 10,-6 q 3,-14 10,-4 q 5,-14 12,-2 q 6,-10 10,2 q -3,10 -10,5 q -2,9 -10,3 q -5,9 -12,2 q -6,7 -10,-2 Z"></path>
+        <path class="bush draw" style="--dd:2.79s" d="M150,280 L150,275 L150,264 L150,264 L149,264 L149,264 L148,264 L148,265 L149,266 L150,267 L151,267 L152,267 L153,266 L154,265 L154,264 L154,262 L153,260 L152,259 L150,258 L148,259 L146,259 L144,261 L143,263 L143,266 L144,268 L146,271 L149,272 L152,272 L155,271 L157,269 L159,267 L160,263 L159,260 L157,256 L154,254 L150,253"></path>
+        <path class="bush draw" style="--dd:2.88s" d="M190,280 q 5,-14 11,-7 q 4,-17 12,-5 q 6,-18 14,-2 q 7,-12 12,3 q -4,12 -12,6 q -2,11 -12,4 q -6,11 -14,2 q -7,9 -11,-3 Z"></path>
+        <path class="bush draw" style="--dd:2.97s" d="M246,280 L246,274 L246,260 L247,259 L247,260 L248,260 L248,261 L247,262 L246,263 L245,263 L243,262 L242,261 L242,259 L242,257 L243,255 L246,254 L248,254 L251,255 L253,258 L253,261 L253,264 L250,267 L247,269 L243,269 L239,267 L237,263 L236,259 L237,255 L240,251 L244,249 L249,249 L254,251 L258,255 L259,261 L258,267 L254,271"></path>
+        <path class="bush draw" style="--dd:3.06s" d="M265,280 q 4,-10 8,-5 q 3,-13 9,-4 q 4,-14 10,-2 q 5,-9 9,2 q -3,9 -9,4 q -2,8 -9,3 q -4,8 -10,2 q -5,7 -8,-2 Z"></path>
+        <path class="bush draw" style="--dd:3.2s" d="M330,280 L330,275 L330,263 L330,262 L329,263 L329,263 L328,264 L328,264 L329,265 L330,266 L331,266 L332,266 L334,265 L334,263 L334,262 L334,260 L332,258 L330,257 L328,257 L326,258 L324,260 L323,262 L323,265 L324,268 L326,270 L329,271 L332,271 L336,270 L338,268 L340,264 L340,260 L338,257 L336,254 L332,252 L327,252 L323,253"></path>
+        <path class="bush draw" style="--dd:3.33s" d="M342,280 q 4,-13 10,-6 q 4,-15 11,-4 q 5,-16 12,-2 q 6,-11 11,3 q -4,11 -11,5 q -2,10 -11,4 q -5,10 -12,2 q -6,8 -10,-3 Z"></path>
+        <path class="bush draw" style="--dd:3.51s" d="M470,280 L470,276 L470,266 L470,266 L471,266 L471,266 L471,266 L471,267 L471,268 L470,268 L470,269 L468,269 L467,268 L467,267 L466,266 L466,264 L467,263 L468,262 L470,261 L472,261 L474,262 L475,263 L476,265 L476,268 L475,270 L474,272 L471,273 L469,274 L466,273 L463,271 L462,268 L461,265 L462,262 L464,259 L466,257 L470,256"></path>
+        <line class="ground-line draw" style="--dd:3.69s" x1="0" y1="280" x2="480" y2="280"></line>
+      </svg>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</header>
+
+<section class="section-pad" id="over-ons">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Denken in decennia,<br>niet in kwartalen</h2>
+    </div>
+    <div class="about-grid">
+      <p>Onze focus ligt op zowel particulier als zakelijk vastgoed, met oog voor de menselijke kant van beleggen: de ondernemer die ruimte zoekt om te groeien, de huurder die zekerheid wil, en de omgeving die leefbaar en aantrekkelijk moet blijven. Die combinatie van rendement en verantwoordelijkheid vormt de kern van hoe wij investeren.<br><br>4B Investment is opgericht vanuit de overtuiging dat goed vastgoed tijd nodig heeft. Wij kopen niet om snel door te verkopen, maar om te bouwen: aan waarde, aan relaties met huurders, en aan een portefeuille die decennia meegaat.</p>
+      <div class="trust-list">
+        <div class="trust-item reveal">          <div>
+            <h3>Langetermijnvisie</h3>
+            <span>Wij beleggen met een horizon van jaren, niet maanden. Objecten worden gekocht om te behouden, niet om snel door te verkopen.</span>
+          </div>
+        </div>
+        <div class="trust-item reveal">          <div>
+            <h3>Zorgvuldige selectie</h3>
+            <span>Elk object wordt getoetst op locatie, courantheid en toekomstwaarde, voordat het onderdeel wordt van onze portefeuille.</span>
+          </div>
+        </div>
+        <div class="trust-item reveal">          <div>
+            <h3>Direct aanspreekbaar</h3>
+            <span>Korte lijnen, geen tussenlagen. Investeerders, huurders en partners spreken rechtstreeks met de mensen die beslissen.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="focus section-pad" id="focus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Waar wij in investeren</h2>
+      <p class="support">Twee vastgoedcategorieën, één zelfde aanpak: aankopen met een langetermijnperspectief en actief beheren na oplevering.</p>
+    </div>
+    <div class="focus-list">
+      <div class="focus-item reveal">
+        <h3>Particulier vastgoed</h3>
+        <p>Woningen en appartementen voor de verhuurmarkt, geselecteerd op locatie, onderhoudsstaat en langetermijnwaarde. Gericht op stabiele verhuur in plaats van snelle waardestijging.</p>
+      </div>
+      <div class="focus-item reveal">
+        <h3>Zakelijk vastgoed</h3>
+        <p>Bedrijfshallen, bedrijfsruimten en kleinschalige bedrijventerreinen voor ondernemers die willen groeien. Functioneel, goed bereikbaar en geschikt voor uiteenlopende bedrijfsactiviteiten.</p>
+      </div>
+      <div class="focus-item reveal">
+        <h3>Langetermijnbeheer</h3>
+        <p>Na oplevering blijft 4B Investment eigenaar en beheerder. Geen doorverkoop na projectafronding, maar een vast aanspreekpunt voor huurders en omgeving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project section-pad" id="project">
+  <div class="wrap">
+    <div class="project-top">
+      <div>
+        <div class="project-loc">Meest recente project — Apeldoorn</div>
+        <h2>Bedrijvenpark Enkzicht</h2>
+        <p class="lead">Aan de rand van Apeldoorn ontwikkelt 4B Investment vijf zelfstandige bedrijfshallen op bedrijvenpark Enkzicht. Een compact, goed bereikbaar project voor ondernemers die op zoek zijn naar functionele bedrijfsruimte dichtbij huis.</p>
+        <div class="project-actions">
+          <button type="button" class="btn btn-primary" data-target="contact" onclick="setInterest('Huurder')">Interesse in een hal?</button>
+          <button type="button" class="btn btn-ghost" data-target="contact" onclick="setInterest('Belegger / investeerder')">Vraag de brochure aan</button>
+        </div>
+      </div>
+      <dl class="specs">
+        <div class="spec reveal">
+          <div class="icon-badge icon-badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path class="icon-draw" d="M4,20 V11 L12,6 L20,11 V20 Z"></path><path class="icon-draw" d="M4,20 H20 M9,20 V14 H15 V20"></path></svg></div>
+          <dt>Aantal eenheden</dt>
+          <dd>5 zelfstandige bedrijfshallen</dd>
+        </div>
+        <div class="spec reveal">
+          <div class="icon-badge icon-badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path class="icon-draw" d="M4,14 L4,20 L10,20 M20,10 L20,4 L14,4 M4,20 L10,14 M20,4 L14,10"></path></svg></div>
+          <dt>Oppervlaktes</dt>
+          <dd>126 m², onderling combineerbaar</dd>
+        </div>
+        <div class="spec reveal">
+          <div class="icon-badge icon-badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path class="icon-draw" d="M12,3 H19 A1,1 0 0 1 20,4 V11 L11,20 L4,13 L12,3 Z"></path><circle class="icon-draw" cx="15.5" cy="7.5" r="1.4"></circle></svg></div>
+          <dt>Geschikt voor</dt>
+          <dd>Opslag, lichte productie, showroom en logistiek</dd>
+        </div>
+        <div class="spec reveal">
+          <div class="icon-badge icon-badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path class="icon-draw" d="M12,21 C12,21 5,14 5,9.5 C5,5.9 8.1,3 12,3 C15.9,3 19,5.9 19,9.5 C19,14 12,21 12,21 Z"></path><circle class="icon-draw" cx="12" cy="9.5" r="2.3"></circle></svg></div>
+          <dt>Ligging</dt>
+          <dd>Bedrijvenpark Enkzicht, Apeldoorn — nabij A50 / A1</dd>
+        </div>
+        <div class="spec reveal">
+          <div class="icon-badge icon-badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect class="icon-draw" x="4" y="5" width="16" height="15" rx="2"></rect><path class="icon-draw" d="M4,10 H20 M8,3 V7 M16,3 V7"></path></svg></div>
+          <dt>Status &amp; oplevering</dt>
+          <dd>In ontwikkeling — oplevering 1 november</dd>
+        </div>
+        <div class="spec reveal">
+          <div class="icon-badge icon-badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path class="icon-draw" d="M4,7 L6,9 L10,5 M13,7 H20 M4,13 L6,15 L10,11 M13,13 H20 M4,19 L6,21 L10,17 M13,19 H20"></path></svg></div>
+          <dt>Voorzieningen</dt>
+          <dd>Pantry, zonnepanelen, airco's op beide verdiepingen en toilet</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="project-video reveal">
+      <div class="project-video-label">Dronebeelden van de locatie</div>
+      <video controls preload="metadata" poster="media/enkzicht-poster.jpg" playsinline>
+        <source src="media/enkzicht-video.mp4" type="video/mp4">
+        Je browser ondersteunt deze video niet.
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="voor-wie">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Voor wie wij er zijn</h2>
+      <p class="support">Of u nu vermogen wilt laten renderen, een project of grondpositie aandraagt, of op zoek bent naar bedrijfsruimte — 4B Investment denkt graag met u mee.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="audience-grid">
+      <div class="audience-card reveal">        <h3>Beleggers</h3>
+        <p>Interesse om mee te investeren in dit of een volgend project? Wij denken graag met u mee over deelname, structuur en rendement op de lange termijn.</p>
+        <button type="button" data-target="contact" onclick="setInterest('Belegger / investeerder')">Neem contact op als belegger</button>
+      </div>
+      <div class="audience-card reveal">        <h3>Projectontwikkelaars &amp; aannemers</h3>
+        <p>Heeft u een grondpositie, project of bouwopgave die bij ons past? Wij staan open voor samenwerking, co-ontwikkeling en aanneming.</p>
+        <button type="button" data-target="contact" onclick="setInterest('Projectontwikkelaar / aannemer')">Neem contact op als ontwikkelaar of aannemer</button>
+      </div>
+      <div class="audience-card reveal">        <h3>Huurders</h3>
+        <p>Op zoek naar bedrijfsruimte in Apeldoorn en omgeving? Bekijk de mogelijkheden op Enkzicht of laat weten waar u naar zoekt.</p>
+        <button type="button" data-target="contact" onclick="setInterest('Huurder')">Neem contact op als huurder</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact section-pad" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Laten we kennismaken</h2>
+      <p class="support">Vul het formulier in of neem rechtstreeks contact op. We reageren doorgaans binnen twee werkdagen.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>4B Investment is gevestigd in Apeldoorn en actief in de regio Gelderland. Neem gerust contact op, ook als u nog in een oriënterende fase zit.</p>
+        <div class="info-row">          <div>
+            <span>E-mail</span>
+            <strong>info@4binvestment.nl</strong>
+          </div>
+        </div>
+        <div class="info-row">          <div>
+            <span>Locatie</span>
+            <strong>Apeldoorn, Gelderland</strong>
+          </div>
+        </div>
+      </div>
+      <form id="contact-form" onsubmit="return sendMail(event)">
+        <div class="field">
+          <label for="naam">Naam</label>
+          <input id="naam" name="naam" type="text" required>
+        </div>
+        <div class="field">
+          <label for="email">E-mailadres</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="telefoon">Telefoonnummer (optioneel)</label>
+          <input id="telefoon" name="telefoon" type="tel">
+        </div>
+        <div class="field">
+          <label for="rol">Ik ben</label>
+          <select id="rol" name="rol" required>
+            <option value="">Maak een keuze</option>
+            <option value="Belegger / investeerder">Belegger / investeerder</option>
+            <option value="Projectontwikkelaar / aannemer">Projectontwikkelaar / aannemer</option>
+            <option value="Huurder">Huurder</option>
+            <option value="Anders">Anders</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bericht">Bericht</label>
+          <textarea id="bericht" name="bericht" required placeholder="Vertel ons kort waar we u mee kunnen helpen"></textarea>
+        </div>
+        <button class="btn btn-dark" type="submit" style="align-self:flex-start;">Verstuur bericht</button>
+        <p class="form-note">Bij versturen wordt uw e-mailprogramma geopend met een vooringevuld bericht aan 4B Investment.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><span class="f-brand">4B Investment</span> — Vastgoed voor de lange termijn</div>
+    <div>Apeldoorn · KvK 98030493 · © 2026 4B Investment</div>
+  </div>
+</footer>
+
+<script>
+  function setInterest(value){
+    var select = document.getElementById('rol');
+    if(select){ select.value = value; }
+  }
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* In-page smooth scrolling — buttons with data-target scroll within this
+     same page to the matching section. No href/URL involved, so there is
+     never any external navigation. */
+  (function(){
+    var buttons = document.querySelectorAll('[data-target]');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-target');
+        if(!id) return;
+        var target = document.getElementById(id);
+        if(!target) return;
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  /* Scroll reveal */
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if(reduceMotion || !('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+    items.forEach(function(el){ io.observe(el); });
+  })();
+
+  /* Nav shadow + scroll progress */
+  (function(){
+    var nav = document.getElementById('site-nav');
+    var progress = document.getElementById('scroll-progress');
+    function onScroll(){
+      if(nav){
+        if(window.scrollY > 12){ nav.classList.add('is-scrolled'); }
+        else { nav.classList.remove('is-scrolled'); }
+      }
+      if(progress){
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = pct + '%';
+      }
+    }
+    document.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+
+  /* Hero parallax — smoothed with easing so it never snaps or jitters */
+  (function(){
+    var visual = document.getElementById('hero-visual');
+    var art = document.getElementById('plot-art');
+    var heroEl = document.getElementById('hero');
+    if(!visual || !art || reduceMotion) return;
+
+    var targetX = 0, targetY = 0;
+    var currentX = 0, currentY = 0;
+    var ticking = false;
+
+    function render(){
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+      art.style.transform = 'rotateY(' + (currentX * 6) + 'deg) rotateX(' + (currentY * -6) + 'deg) translate(' + (currentX * -8) + 'px,' + (currentY * -6) + 'px)';
+      if(Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001){
+        requestAnimationFrame(render);
+      } else {
+        ticking = false;
+      }
+    }
+
+    function requestRender(){
+      if(!ticking){
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    }
+
+    heroEl.addEventListener('mousemove', function(e){
+      var rect = heroEl.getBoundingClientRect();
+      targetX = (e.clientX - rect.left) / rect.width - 0.5;
+      targetY = (e.clientY - rect.top) / rect.height - 0.5;
+      requestRender();
+    });
+    heroEl.addEventListener('mouseleave', function(){
+      targetX = 0;
+      targetY = 0;
+      requestRender();
+    });
+
+    var units = art.querySelectorAll('.hall');
+    units.forEach(function(unit){
+      unit.addEventListener('mouseenter', function(){
+        unit.classList.add('is-active');
+      });
+      unit.addEventListener('mouseleave', function(){
+        unit.classList.remove('is-active');
+      });
+    });
+  })();
+
+  /* Magnetic buttons */
+  (function(){
+    if(reduceMotion) return;
+    var buttons = document.querySelectorAll('.btn');
+    buttons.forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var mx = (e.clientX - r.left) / r.width - 0.5;
+        var my = (e.clientY - r.top) / r.height - 0.5;
+        btn.style.transform = 'translate(' + (mx * 8) + 'px,' + (my * 8 - 2) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function(){
+        btn.style.transform = '';
+      });
+    });
+  })();
+
+  function sendMail(e){
+    e.preventDefault();
+    var naam = document.getElementById('naam').value;
+    var email = document.getElementById('email').value;
+    var telefoon = document.getElementById('telefoon').value;
+    var rol = document.getElementById('rol').value;
+    var bericht = document.getElementById('bericht').value;
+
+    var subject = encodeURIComponent('Contact via website — ' + (rol || 'Algemeen'));
+    var body = encodeURIComponent(
+      'Naam: ' + naam + '\n' +
+      'E-mail: ' + email + '\n' +
+      'Telefoon: ' + (telefoon || '-') + '\n' +
+      'Ik ben: ' + (rol || '-') + '\n\n' +
+      'Bericht:\n' + bericht
+    );
+    window.location.href = 'mailto:info@4binvestment.nl?subject=' + subject + '&body=' + body;
+    return false;
+  }
+</script>
+
+</body>
+</html>
